@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 1. TITLE: Главный заголовок страницы (Ключевые слова) -->
     <title>ООО «BUXARA NEFT KAPITAL» | Надёжный поставщик нефтепродуктов, ГСМ и топлива в Узбекистане</title>
+
 
     <!-- 0. FAVICONS и APPLE TOUCH ICONS: Для оптимизации на всех устройствах и браузерах -->
     <!-- Используем загруженный файл (apple-touch-icon.png) для устройств Apple -->
@@ -15,14 +17,17 @@
     <!-- <link rel="manifest" href="/site.webmanifest"> -->
     <!-- Конец секции фавиконов -->
 
+
     <!-- 2. META DESCRIPTION: Описание для поисковых систем (макс. 160 символов) -->
     <meta name="description" content="Надежный поставщик нефтепродуктов, ГСМ, дизельного топлива и бензина по всей территории Узбекистана. Прямые поставки, собственная логистика и гарантия качества от ООО «BUXARA NEFT KAPITAL».">
     
     <!-- 3. META KEYWORDS: Ключевые слова (хоть и менее важны, но полезны) -->
     <meta name="keywords" content="нефтепродукты, ГСМ, дизельное топливо, бензин Аи-95, Узбекистан, BUXARA NEFT KAPITAL, оптовые поставки топлива, масла">
 
+
     <!-- 4. CANONICAL LINK: Предотвращает проблемы с дублированием контента для SEO -->
     <link rel="canonical" href="https://www.bukharaneftcapital.uz/">
+
 
     <!-- 5. OPEN GRAPH (OG) / Социальные сети: Для корректного превью в Telegram, Facebook и т.д. -->
     <meta property="og:title" content="ООО «BUXARA NEFT KAPITAL» | Надёжный поставщик нефтепродуктов и ГСМ">
@@ -32,6 +37,7 @@
     <!-- Используем заглушку для изображения в соцсетях, так как локальный файл bnk_logo.png недоступен -->
     <meta property="og:image" content="https://placehold.co/1200x630/1E3A8A/F59E0B?text=BNC+Oil+Capital">
     <meta property="og:site_name" content="ООО «BUXARA NEFT KAPITAL»">
+
 
     <!-- Подключение Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -46,7 +52,7 @@
         
         /* Для совместимости с навигацией по хешу */
         :target::before {
-            content: "";
+            content: '';
             display: block;
             height: 90px; /* Сместить якорь на высоту шапки */
             margin: -90px 0 0;
@@ -74,32 +80,64 @@
             }
         }
 
-        // --- Старая функция submitForm(event) УДАЛЕНА, так как Formspree будет обрабатывать отправку ---
-        
+        // Функция для ВАЛИДАЦИИ формы перед отправкой в Formspree
+        function validateForm(event) {
+            const form = event.target;
+            const messageBox = document.getElementById('form-message');
+            
+            // Простая проверка
+            const name = form.name.value.trim();
+            const email = form.email.value.trim();
+            const message = form.message.value.trim();
+            
+            if (name === '' || email === '' || message === '') {
+                messageBox.textContent = 'Пожалуйста, заполните все поля.';
+                messageBox.classList.remove('hidden', 'text-secondary-teal');
+                messageBox.classList.add('text-red-500');
+                
+                // Предотвратить отправку
+                return false;
+            }
+
+            // Если все в порядке, скрыть сообщение об ошибке и разрешить отправку
+            messageBox.classList.add('hidden');
+            messageBox.classList.remove('text-red-500');
+            
+            // Показать сообщение "Отправка..."
+            messageBox.textContent = 'Отправка...';
+            messageBox.classList.remove('hidden');
+            messageBox.classList.add('text-secondary-teal'); // Используем цвет акцента для "Отправки"
+            
+            return true;
+        }
     </script>
 </head>
+
 <body class="text-text-dark">
+
 
     <!-- 1. Header и Навигация -->
     <header class="bg-white shadow-md sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
             <!-- Логотип/Название компании -->
             <div class="flex items-center space-x-2">
-            <!-- Логотип/Название компании -->
+               <!-- Логотип/Название компании -->
             <div class="flex items-center space-x-2">
                 <!-- Логотип bnk_logo.png добавлен здесь -->
-                <img src="bnk_logo.png" alt="Логотип ООО BUXARA NEFT KAPITAL" class="h-16 w-auto">
+                <img src="bnk_logo.png" alt="Логотип ООО BUXARA NEFT KAPITAL" class="h-16 w-auto" onerror="this.onerror=null; this.src='https://placehold.co/150x64/1E3A8A/F59E0B?text=BNC';">
                 <div class="text-2xl font-extrabold text-primary-blue">
                     <span class="text-secondary-teal">BUXARA</span> NEFT KAPITAL
                 </div>
             </div>
 
+
             <!-- Десктопная навигация -->
             <nav class="hidden md:flex space-x-8 text-lg font-medium">
                 <a href="#about" onclick="scrollToSection('about')" class="hover:text-secondary-teal transition duration-300">О нас</a>
                 <a href="#services" onclick="scrollToSection('services')" class="hover:text-secondary-teal transition duration-300">Продукция</a>
-                <a href="#contact" onclick="scrollToSection('contact')" class="px-4 py-2 bg-primary-blue text-white rounded-lg shadow-lg hover:bg-secondary-teal transition duration-300">Контакты</a>
+                <a href="#contact" onclick="scrollToSection('contact')" class="px-4 py-2 bg-primary-blue text-white rounded-lg shadow-lg hover:bg-secondary-teal hover:text-primary-blue transition duration-300">Контакты</a>
             </nav>
+
 
             <!-- Кнопка бургер-меню для мобильных устройств -->
             <button class="md:hidden text-primary-blue focus:outline-none" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" aria-label="Открыть меню">
@@ -107,33 +145,36 @@
             </button>
         </div>
 
+
         <!-- Мобильное меню -->
         <div id="mobile-menu" class="hidden md:hidden bg-white shadow-xl">
             <a href="#about" onclick="scrollToSection('about'); document.getElementById('mobile-menu').classList.add('hidden')" class="block px-4 py-3 text-lg hover:bg-bg-light transition duration-300">О нас</a>
             <a href="#services" onclick="scrollToSection('services'); document.getElementById('mobile-menu').classList.add('hidden')" class="block px-4 py-3 text-lg hover:bg-bg-light transition duration-300">Продукция</a>
-            <a href="#contact" onclick="scrollToSection('contact'); document.getElementById('mobile-menu').classList.add('hidden')" class="block px-4 py-3 text-lg bg-primary-blue text-white hover:bg-secondary-teal transition duration-300">Контакты</a>
+            <a href="#contact" onclick="scrollToSection('contact'); document.getElementById('mobile-menu').classList.add('hidden')" class="block px-4 py-3 text-lg bg-primary-blue text-white hover:bg-secondary-teal hover:text-primary-blue transition duration-300">Контакты</a>
         </div>
     </header>
 
+
     <main>
         <!-- 2. Секция Hero / Вступление (Конвертация h2 в h1 для SEO) -->
-        <section id="hero" class="py-20 sm:py-32 text-white bg-primary-blue">
+        <section id="hero" class="py-20 md:py-32 text-white bg-primary-blue">
             <div id="hero-content" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <!-- 6. H1: Главный, уникальный заголовок страницы (Лучший SEO-практика) -->
-                <h1 class="text-4xl sm:text-6xl font-extrabold mb-4 leading-tight">
-                    Энергия, которая движет <br class="hidden sm:inline"> промышленность <span class="text-secondary-teal">Узбекистана</span>
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">
+                    Энергия, которая движет <br class="hidden md:block"> промышленность <span class="text-secondary-teal">Узбекистана</span>
                 </h1>
-                <p class="text-xl sm:text-2xl mb-8 font-light max-w-3xl mx-auto">
+                <p class="text-xl md:text-2xl mb-8 font-light max-w-3xl mx-auto">
                    ООО «BUXARA NEFT KAPITAL» — надёжный поставщик нефтепродуктов и ГСМ по всей территории Республики.
                 </p>
-                <a href="#contact" onclick="scrollToSection('contact')" class="inline-block px-10 py-4 bg-secondary-teal text-text-dark font-bold text-lg rounded-xl shadow-2xl hover:bg-opacity-90 transition duration-300 transform hover:scale-105">
+                <a href="#contact" onclick="scrollToSection('contact')" class="inline-block px-10 py-4 bg-secondary-teal text-text-dark font-bold text-lg rounded-xl shadow-2xl hover:opacity-90 transition duration-300 transform hover:scale-105">
                     Получить коммерческое предложение
                 </a>
             </div>
         </section>
 
+
         <!-- 3. Секция О нас -->
-        <section id="about" class="py-16 sm:py-24 bg-bg-light">
+        <section id="about" class="py-16 md:py-24 bg-bg-light">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <!-- H2: Заголовок секции -->
                 <h2 class="text-4xl font-bold text-center mb-12 text-primary-blue">
@@ -141,7 +182,7 @@
                 </h2>
                 
                 <!-- Контент -->
-                <div class="bg-white p-8 sm:p-12 rounded-2xl shadow-xl space-y-6">
+                <div class="bg-white p-8 md:p-12 rounded-2xl shadow-xl space-y-6">
                     <!-- H3: Подзаголовок -->
                     <h3 class="text-3xl font-bold text-primary-blue">Динамичное развитие и экспертиза</h3>
                     <p class="text-lg leading-relaxed">
@@ -159,6 +200,7 @@
                         Компания располагает собственным автопарком и логистической инфраструктурой, что обеспечивает оперативную и бесперебойную доставку нефтепродуктов по всей стране. Контроль на каждом этапе транспортировки гарантирует сохранность качества топлива до момента его получения клиентом.
                     </p>
                 </div>
+
 
                 <!-- Metrics below the content -->
                 <div class="bg-white mt-12 p-8 rounded-2xl shadow-xl">
@@ -178,11 +220,13 @@
                     </div>
                 </div>
 
+
             </div>
         </section>
 
+
         <!-- 4. Секция Ассортимент продукции и преимущества -->
-        <section id="services" class="py-16 sm:py-24">
+        <section id="services" class="py-16 md:py-24">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <!-- H2: Заголовок секции -->
                 <h2 class="text-4xl font-bold text-center mb-12 text-primary-blue">
@@ -201,6 +245,7 @@
                         <p class="text-gray-600">Евро,К-5 и другие марки.</p>
                     </div>
 
+
                     <!-- Продукт 2: Бензин -->
                     <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 border-b-4 border-secondary-teal text-center">
                         <div class="text-4xl text-secondary-teal mb-3">🚗</div>
@@ -209,6 +254,7 @@
                         <p class="text-gray-600">Аи-91,Аи-92,Аи-95 и другие марки.</p>
                     </div>
 
+
                     <!-- Продукт 3: Мазут и Керосин -->
                     <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 border-b-4 border-primary-blue text-center">
                         <div class="text-4xl text-primary-blue mb-3">🔥</div>
@@ -216,6 +262,7 @@
                         <h4 class="text-xl font-bold mb-2 text-text-dark">Мазут, Керосин, Битум</h4>
                         <p class="text-gray-600">Продукты для промышленности и строительства.</p>
                     </div>
+
 
                     <!-- Продукт 4: Масла и ГСМ -->
                     <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 border-b-4 border-secondary-teal text-center">
@@ -226,9 +273,10 @@
                     </div>
                 </div>
 
+
                 <!-- H3: Подзаголовок преимуществ -->
                 <h3 class="text-3xl font-bold text-center mb-8 text-text-dark">Наши преимущества</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div class="flex items-start space-x-3 p-4 bg-white rounded-lg shadow-md border-l-4 border-secondary-teal">
                         <span class="text-secondary-teal text-2xl font-bold">✓</span>
                         <p>Прямые поставки от ведущих производителей.</p>
@@ -251,74 +299,56 @@
                     </div>
                 </div>
 
+
             </div>
         </section>
 
+
         <!-- 5. Секция Контакты и Форма обратной связи -->
-        <section id="contact" class="py-16 sm:py-24 bg-bg-light">
+        <section id="contact" class="py-16 md:py-24 bg-bg-light">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <!-- H2: Заголовок секции -->
                 <h2 class="text-4xl font-bold text-center mb-12 text-primary-blue">
                     Свяжитесь с нами
                 </h2>
                 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 bg-white p-8 sm:p-12 rounded-2xl shadow-xl">
-                    
-                    <!-- 
-                    ================================================================
-                    !!! НАЧАЛО ИСПРАВЛЕННОЙ ФОРМЫ !!!
-                    ================================================================
-                    -->
-                    
-                    <!-- Контактная форма (ИСПРАВЛЕНО для работы с Formspree) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 bg-white p-8 md:p-12 rounded-2xl shadow-xl">
+                    <!-- Контактная форма -->
                     <div>
                         <!-- H3: Подзаголовок формы -->
                         <h3 class="text-2xl font-semibold mb-6 text-text-dark">Обсудим ваш проект?</h3>
                         
                         <!-- 
-                        !!! ШАГ 1: Зарегистрируйтесь на formspree.io
-                        !!! ШАГ 2: Создайте там новую форму
-                        !!! ШАГ 3: Замените "ВАШ_УНИКАЛЬНЫЙ_URL_FORMSPREE" на ваш URL (напр. https://formspree.io/f/xxxxxxxx)
+                          *** ИЗМЕНЕНИЯ ЗДЕСЬ ***
+                          1. Добавлены 'action' и 'method' для Formspree.
+                          2. 'onsubmit' теперь вызывает 'validateForm' и возвращает его результат.
                         -->
-                        <form action="https://https://forms.gle/qTVU3DfSKSEzLitf8" method="POST" class="space-y-6">
+                        <form id="contact-form" action="https://formspree.io/f/meopejoj" method="POST" onsubmit="return validateForm(event)" class="space-y-6">
                             
-                            <!-- Скрытое поле для темы письма (название вашей компании) -->
-                            <input type="hidden" name="_subject" value="Запрос КП с сайта BUXARA NEFT KAPITAL">
-                    
-                            <!-- 1. Ваше имя -->
+                            <div id="form-message" class="hidden p-3 rounded-lg font-medium"></div>
+
+
                             <div>
                                 <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Ваше имя</label>
-                                <input type="text" id="name" name="Имя" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary-blue focus:border-primary-blue transition duration-300">
+                                <input type="text" id="name" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary-blue focus:border-primary-blue transition duration-300">
                             </div>
-                    
-                            <!-- 2. Email (важно для ответа) -->
                             <div>
                                 <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                                <!-- Formspree использует специальное поле _replyto для обратного ответа -->
-                                <input type="email" id="email" name="_replyto" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary-blue focus:border-primary-blue transition duration-300">
+                                <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary-blue focus:border-primary-blue transition duration-300">
                             </div>
-                            
-                            <!-- 3. Сообщение -->
                             <div>
                                 <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Сообщение</label>
-                                <textarea id="message" name="Сообщение" rows="4" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary-blue focus:border-primary-blue transition duration-300"></textarea>
+                                <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary-blue focus:border-primary-blue transition duration-300"></textarea>
                             </div>
-                    
-                            <!-- Кнопка отправки -->
                             <button type="submit" class="w-full px-6 py-3 bg-secondary-teal text-text-dark font-bold rounded-lg shadow-lg hover:bg-primary-blue hover:text-white transition duration-300">
                                 Отправить запрос
                             </button>
                         </form>
                     </div>
 
-                    <!-- 
-                    ================================================================
-                    !!! КОНЕЦ ИСПРАВЛЕННОЙ ФОРМЫ !!!
-                    ================================================================
-                    -->
 
                     <!-- Контактные данные -->
-                    <div class="space-y-8 lg:mt-6">
+                    <div class="space-y-8 md:space-y-6">
                         <!-- H3: Подзаголовок контактов -->
                         <h3 class="text-2xl font-semibold mb-6 text-text-dark">Наши данные</h3>
                         
@@ -331,6 +361,7 @@
                             </div>
                         </div>
 
+
                         <!-- Email -->
                         <div class="flex items-start space-x-4">
                             <div class="text-secondary-teal text-3xl">📧</div>
@@ -339,6 +370,7 @@
                                 <a href="mailto:bnkoil999@mail.ru" class="text-lg font-medium text-text-dark hover:text-secondary-teal transition duration-300">bnkoil999@mail.ru</a>
                             </div>
                         </div>
+
 
                         <!-- Instagram (добавлена aria-label для SEO/A11y) -->
                         <a href="https://www.instagram.com/bnk_opt_gsm/" target="_blank" class="flex items-start space-x-4 group hover:text-primary-blue transition duration-300" aria-label="Профиль Instagram @bnk_opt_gsm">
@@ -349,6 +381,7 @@
                                 <p class="text-sm text-gray-500">Аккаунт продаж: @bnk_sales</p>
                             </div>
                         </a>
+
 
                         <!-- Telegram (добавлена aria-label для SEO/A11y) -->
                         <a href="https://t.me/bnk_sales" target="_blank" class="flex items-start space-x-4 group hover:text-primary-blue transition duration-300" aria-label="Профиль Telegram @bnk_sales">
@@ -372,7 +405,9 @@
             </div>
         </section>
 
+
     </main>
+
 
     <!-- 6. Футер (footer) -->
     <footer class="bg-primary-blue text-white py-8">
@@ -388,4 +423,3 @@
     </footer>
 </body>
 </html>
-
